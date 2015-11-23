@@ -64,15 +64,22 @@ public class Sprite{
 //            xSpeed = 0;
 //            x = 0;
 //        }
+        try {
+            Thread.sleep(50);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
+        currentFrame = ++currentFrame % 6;
         x += xSpeed;
         y += ySpeed;
     }
 
     public void drawIt(Canvas canvas){
         update();
-        int srcY = direction * width;
-        Rect src = new Rect(0, srcY, width - 35, height + srcY - 70);
+        int srcX = currentFrame * width;
+        int srcY = direction * height;
+        Rect src = new Rect(srcX, srcY, srcX + width - 35, height + srcY - 70);
         Rect dst = new Rect(x, y, x+width, y+height);
         canvas.drawBitmap(b, src, dst, null);
     }
